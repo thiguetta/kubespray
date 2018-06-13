@@ -38,8 +38,6 @@
   tags:
     - facts
 
-- import_tasks: pre-upgrade.yml
-
 - name: ensure docker-ce repository public key is installed
   action: "{{ docker_repo_key_info.pkg_key }}"
   args:
@@ -116,7 +114,7 @@
   delay: "{{ retry_stagger | random + 3 }}"
   with_items: "{{ docker_package_info.pkgs }}"
   notify: restart docker
-  when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS"] or is_atomic) and (docker_package_info.pkgs|length > 0)
+  when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS"] or is_atomic or is_fedora) and (docker_package_info.pkgs|length > 0)
 
 - name: ensure service is started if docker packages are already present
   service:
