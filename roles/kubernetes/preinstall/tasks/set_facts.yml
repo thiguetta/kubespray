@@ -96,4 +96,17 @@
   when: is_atomic
 
 - include: set_resolv_facts.yml
-  tags: [bootstrap-os, resolvconf, facts]
+  tags:
+    - bootstrap-os
+    - resolvconf
+    - facts
+
+- name: check if fedora host
+  register: fedora
+  command: grep "NAME=Fedora" /etc/os-release
+  check_mode: no
+  ignore_errors: yes
+  changed_when: no
+
+- set_fact:
+    is_fedora: "{{ fedora.rc }} == 0"
