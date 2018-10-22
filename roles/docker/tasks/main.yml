@@ -41,7 +41,7 @@
   tags:
     - facts
 
-- import_tasks: pre-upgrade.yml
+# - import_tasks: pre-upgrade.yml
 
 - name: ensure docker-ce repository public key is installed
   action: "{{ docker_repo_key_info.pkg_key }}"
