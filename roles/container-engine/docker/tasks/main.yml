@@ -47,6 +47,7 @@
   tags:
     - facts
 
+<<<<<<< HEAD
 - name: disable unified_cgroup_hierarchy in Fedora 31+
   shell:
     cmd: grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
@@ -62,7 +63,7 @@
     - (ansible_distribution_major_version | int) >= 31
     - ansible_proc_cmdline['systemd.unified_cgroup_hierarchy'] is not defined or ansible_proc_cmdline['systemd.unified_cgroup_hierarchy'] != '0'
 
-- import_tasks: pre-upgrade.yml
+# - import_tasks: pre-upgrade.yml
 
 - name: ensure docker-ce repository public key is installed
   action: "{{ docker_repo_key_info.pkg_key }}"
