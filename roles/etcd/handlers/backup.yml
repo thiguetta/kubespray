@@ -41,7 +41,7 @@
   retries: 3
   register: backup_v2_command
   until: backup_v2_command.rc == 0
-  delay: "{{ retry_stagger | random + 3 }}"
+  delay: "{{ retry_stagger }}"
 
 - name: Backup etcd v3 data
   command: >-
