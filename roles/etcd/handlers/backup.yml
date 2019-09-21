@@ -5,8 +5,6 @@
     - Refresh Time Fact
     - Set Backup Directory
     - Create Backup Directory
-    - Stat etcd v2 data directory
-    - Backup etcd v2 data
     - Backup etcd v3 data
   when: etcd_cluster_is_healthy.rc == 0
 
@@ -41,7 +39,7 @@
   retries: 3
   register: backup_v2_command
   until: backup_v2_command.rc == 0
-  delay: "{{ retry_stagger }}"
+  delay: "{{ retry_stagger | random + 3 }}"
 
 - name: Backup etcd v3 data
   command: >-
